@@ -6,19 +6,18 @@ extends Node3D
 @onready var camera: Camera3D = $Camera
 
 var base_map_size: int = 3
+var dice_value_chips: Node3D = Node3D.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(dice_value_chips)
+	
+	randomize()
 	generate_base_resources()
 	place_base_settlement_locations()
+	place_value_chips()
 	camera.position = map.position + Vector3(0, 50, 0)
 	
-	
-
-				
-				
-			
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -26,16 +25,39 @@ func _process(delta):
 	
 
 func generate_base_resources() -> void:
+	var resource_list = []
+	var resources = PlayerResources.BaseResource.values()
+	for resource in resources:
+		for resource_counter in range(4):
+			resource_list.append(resource)
+	resource_list.shuffle()
+	
+	var chip_values: Array[int] = [1, 2, 3, 3, 4, 4, 5, 5, 6, 6, 8, 8, 9, 9, 10, 10, 11, 12]
+	chip_values.shuffle()
+	
 	for q in range(-(base_map_size-1), base_map_size):
 		for r in range(-(base_map_size-1), base_map_size):
 			var s = clamp(-q - r, -(base_map_size - 1), (base_map_size - 1))
 			if (q + r + s) != 0:
 				continue
-			var tile = preload("res://scene/world/map/hexagon/resource_tile.tscn").instantiate() as ResourceTile
+			var tile: HexagonTile = null
+			if q == 0 and r == 0 and s == 0:
+				tile = preload("res://scene/world/map/hexagon/filler_tile.tscn").instantiate() as FillerTile
+			else:
+				tile = preload("res://scene/world/map/hexagon/resource_tile.tscn").instantiate() as ResourceTile
+				print(resource_list.size())
+				tile.resource_type = resource_list.pop_back()
 			tile.set_debug_color(Color(randf(), randf(), randf()))
 			tile.cube_coordinates = Vector3i(q, r, s)
 			tile.name = "HexagonTile %s,%s,%s" % [q, r, s]
 			map.add_tile(tile)
+			
+			if tile is ResourceTile:
+				var chip = preload("res://scene/world/map/tile_value_chip.tscn").instantiate() as TileValueChip
+				chip.position = tile.position + Vector3(0, 1, 0)
+				chip.assigned_tile = tile
+				chip.set_value(chip_values.pop_front())
+				dice_value_chips.add_child(chip)
 
 func place_base_settlement_locations() -> void:
 	for q in range(-(base_map_size - 1), base_map_size):
@@ -94,6 +116,17 @@ func place_base_settlement_locations() -> void:
 				
 				mesh.position = (corner_a.position + corner_b.position) / 2
 				mesh.look_at(corner_a.position)
+
+func place_value_chips() -> void:
+	for q in range(-(base_map_size - 1), base_map_size):
+		for r in range(-(base_map_size - 1), base_map_size):
+			var coordinates = map.get_coordinates_from_qr(q, r)
+			if not is_coordinate_in_base_map(coordinates):
+				continue
+			var tile = map.get_tile(coordinates)
+			if not tile is ResourceTile:
+				continue
+
 
 func is_coordinate_in_base_map(coordinate: Vector3i) -> bool:
 	return abs(coordinate.x) < base_map_size and abs(coordinate.y) < base_map_size and abs(coordinate.z) < base_map_size

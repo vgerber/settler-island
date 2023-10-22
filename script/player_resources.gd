@@ -5,7 +5,8 @@ enum BaseResource {
 	WOOD,
 	ORE,
 	CLAY,
-	WHOOL
+	WHOOL,
+	WHEAT
 }
 	
 var resources: Dictionary = {}

@@ -1,3 +1,4 @@
+class_name FillerTile
 extends HexagonTile
 
 

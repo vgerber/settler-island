@@ -1,3 +1,4 @@
+class_name TileValueChip
 extends Node3D
 
 var value: int = 0
