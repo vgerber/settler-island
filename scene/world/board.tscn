@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkk6owccsfxtn"]
+
+[ext_resource type="Script" path="res://scene/world/board.gd" id="1_gkl64"]
+[ext_resource type="PackedScene" uid="uid://bmlwfmhh34hak" path="res://scene/world/camera.tscn" id="1_n1u78"]
+[ext_resource type="Script" path="res://scene/world/map/hexagon/hexagon_map.gd" id="4_lbsr5"]
+[ext_resource type="PackedScene" uid="uid://c8xklw5v4an3i" path="res://scene/world/map/location/settlement_map.tscn" id="4_nr257"]
+
+[node name="Board" type="Node3D"]
+script = ExtResource("1_gkl64")
+
+[node name="Camera" parent="." instance=ExtResource("1_n1u78")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -18.5592, 76.1492, -76.5903)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.863378, -0.396336, 0.312244, 0, 0.618847, 0.785511, -0.504558, 0.678193, -0.534299, 0, 0, 0)
+
+[node name="SettlementMap" parent="." instance=ExtResource("4_nr257")]
+
+[node name="HexagonMap" type="Node3D" parent="."]
+script = ExtResource("4_lbsr5")

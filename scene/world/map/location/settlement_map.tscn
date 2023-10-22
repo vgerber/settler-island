@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8xklw5v4an3i"]
+
+[ext_resource type="Script" path="res://scene/world/map/location/settlement_map.gd" id="1_24a1s"]
+
+[node name="SettlementMap" type="Node3D"]
+script = ExtResource("1_24a1s")
+
+[node name="Settlements" type="Node3D" parent="."]
+
+[node name="Roads" type="Node3D" parent="."]

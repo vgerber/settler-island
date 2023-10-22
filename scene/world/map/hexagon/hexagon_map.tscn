@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgigprc22lgen"]
+
+[ext_resource type="Script" path="res://scene/world/map/hexagon/hexagon_map.gd" id="1_jdi5m"]
+
+[node name="HexagonMap" type="Node3D"]
+script = ExtResource("1_jdi5m")
+
+[node name="Tiles" type="Node3D" parent="."]

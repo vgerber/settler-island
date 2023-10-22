@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5xh3bxqydtcx"]
+
+[ext_resource type="Script" path="res://scene/world/map/location/settlement_location.gd" id="1_icax1"]
+[ext_resource type="PackedScene" uid="uid://ccaxp3063bt48" path="res://scene/world/map/location/build_location.tscn" id="2_jym24"]
+[ext_resource type="ArrayMesh" uid="uid://d1himoa6d4dk4" path="res://asset/tiles/village_piece.obj" id="3_nr8hp"]
+[ext_resource type="ArrayMesh" uid="uid://baef6d7jrnwue" path="res://asset/tiles/city_piece.obj" id="4_58c6f"]
+
+[node name="SettlementLocation" type="Node3D"]
+script = ExtResource("1_icax1")
+
+[node name="BuildLocation" parent="." instance=ExtResource("2_jym24")]
+
+[node name="VillageMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)
+mesh = ExtResource("3_nr8hp")
+
+[node name="CityMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+visible = false
+mesh = ExtResource("4_58c6f")

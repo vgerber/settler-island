@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccaxp3063bt48"]
+
+[ext_resource type="Script" path="res://scene/world/map/location/build_location.gd" id="1_a1n0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_naya5"]
+transparency = 1
+albedo_color = Color(0.317647, 0.317647, 0.317647, 0.670588)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1q7p1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y2yjf"]
+
+[node name="BuildLocation" type="Node3D"]
+script = ExtResource("1_a1n0w")
+
+[node name="LocationMesh" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_naya5")
+mesh = SubResource("CylinderMesh_1q7p1")
+
+[node name="IdLabel" type="Label3D" parent="LocationMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17076, 0)
+pixel_size = 0.02
+billboard = 1
+double_sided = false
+text = "0,0,0
+0,0,0"
+
+[node name="MouseArea" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MouseArea"]
+shape = SubResource("CylinderShape3D_y2yjf")
+
+[connection signal="input_event" from="MouseArea" to="." method="_on_mouse_area_input_event"]
+[connection signal="mouse_entered" from="MouseArea" to="." method="_on_mouse_area_mouse_entered"]
+[connection signal="mouse_exited" from="MouseArea" to="." method="_on_mouse_area_mouse_exited"]

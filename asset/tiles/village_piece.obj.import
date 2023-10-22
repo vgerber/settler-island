@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d1himoa6d4dk4"
+path="res://.godot/imported/village_piece.obj-d1e9ea344f11d98f7a257ddcc089a81b.mesh"
+
+[deps]
+
+files=["res://.godot/imported/village_piece.obj-d1e9ea344f11d98f7a257ddcc089a81b.mesh"]
+
+source_file="res://asset/tiles/village_piece.obj"
+dest_files=["res://.godot/imported/village_piece.obj-d1e9ea344f11d98f7a257ddcc089a81b.mesh", "res://.godot/imported/village_piece.obj-d1e9ea344f11d98f7a257ddcc089a81b.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

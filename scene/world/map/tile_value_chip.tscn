@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbyjflu7mmpjc"]
+
+[ext_resource type="Script" path="res://scene/world/map/tile_value_chip.gd" id="1_lq73h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iia0"]
+albedo_color = Color(1, 0.729412, 0.368627, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_p2y8t"]
+material = SubResource("StandardMaterial3D_1iia0")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 0.2
+
+[node name="TileValueChip" type="Node3D"]
+script = ExtResource("1_lq73h")
+
+[node name="ChipMesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_p2y8t")
+
+[node name="ChipValue" type="Label3D" parent="ChipMesh"]
+transform = Transform3D(1, 0, 0, 0, 2.98023e-08, 1, 0, -1, 2.98023e-08, 0, 0.11, 0)
+pixel_size = 0.01
+modulate = Color(0, 0, 0, 1)
+text = "12"
+font_size = 200
