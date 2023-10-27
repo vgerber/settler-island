@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb67trj45r7wr"]
+
+[ext_resource type="Script" path="res://scene/ui/board/hud/player_summary_item.gd" id="1_t1xqw"]
+[ext_resource type="Texture2D" uid="uid://caorssw4f1axb" path="res://icon.svg" id="1_whrl3"]
+[ext_resource type="PackedScene" uid="uid://b1e4j0yp4xg4m" path="res://scene/ui/controls/icon_label.tscn" id="2_itrf6"]
+
+[node name="PlayerSummaryItem" type="PanelContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_t1xqw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("1_whrl3")
+expand_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerNameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "PlayerName"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CardsLabel" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_itrf6")]
+layout_mode = 2

@@ -5,8 +5,18 @@ extends Node3D
 @onready var settlement_map: SettlementMap = $SettlementMap
 @onready var camera: Camera3D = $Camera
 
+
+
 var base_map_size: int = 3
 var dice_value_chips: Node3D = Node3D.new()
+
+var board_resources: Array[PlayerResource] = [
+	WoodResource.new(),
+	ClayResource.new(),
+	OreResource.new(),
+	WheatResource.new(),
+	SheepResource.new()
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,9 +36,17 @@ func _process(delta):
 
 func generate_base_resources() -> void:
 	var resource_list = []
-	var resources = PlayerResources.BaseResource.values()
-	for resource in resources:
-		for resource_counter in range(4):
+	var resource_colors = {
+		board_resources[0]: Color(0.1, 0.6, 0.05), 
+		board_resources[1]: Color(0.5, 0.2, 0.0), 
+		board_resources[2]: Color(0.4, 0.4, 0.4),
+		board_resources[3]: Color(0.6, 0.6, 0.0), 
+		board_resources[4]: Color(0.3, 0.9, 0.3)
+	}
+	var resource_counts = [4, 3, 3, 4, 4]
+	for resource_count_index in range(resource_counts.size()):
+		var resource = board_resources[resource_count_index]
+		for resource_counter in range(resource_counts[resource_count_index]):
 			resource_list.append(resource)
 	resource_list.shuffle()
 	
@@ -43,11 +61,11 @@ func generate_base_resources() -> void:
 			var tile: HexagonTile = null
 			if q == 0 and r == 0 and s == 0:
 				tile = preload("res://scene/world/map/hexagon/filler_tile.tscn").instantiate() as FillerTile
+				tile.set_debug_color(Color(0.9, 0.9, 0.2))
 			else:
 				tile = preload("res://scene/world/map/hexagon/resource_tile.tscn").instantiate() as ResourceTile
-				print(resource_list.size())
 				tile.resource_type = resource_list.pop_back()
-			tile.set_debug_color(Color(randf(), randf(), randf()))
+				tile.set_debug_color(resource_colors[tile.resource_type])
 			tile.cube_coordinates = Vector3i(q, r, s)
 			tile.name = "HexagonTile %s,%s,%s" % [q, r, s]
 			map.add_tile(tile)
@@ -127,6 +145,12 @@ func place_value_chips() -> void:
 			if not tile is ResourceTile:
 				continue
 
+func get_tiles_for_chip_value(value: int) -> Array[ResourceTile]:
+	var tiles: Array[ResourceTile] = []
+	for chip in (dice_value_chips.get_children() as Array[TileValueChip]):
+		if chip.value == value:
+			tiles.push_back(chip.assigned_tile)
+	return tiles
 
 func is_coordinate_in_base_map(coordinate: Vector3i) -> bool:
 	return abs(coordinate.x) < base_map_size and abs(coordinate.y) < base_map_size and abs(coordinate.z) < base_map_size

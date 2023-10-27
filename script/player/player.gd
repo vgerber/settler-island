@@ -1,10 +1,12 @@
 class_name Player
 extends RefCounted
 
+signal changed()
+
 var resources: PlayerResources
 
-func _init():
-	resources = PlayerResources.new()
+func _init(p_resources: PlayerResources):
+	resources = p_resources
 
 func get_prestiege() -> int:
 	return 0

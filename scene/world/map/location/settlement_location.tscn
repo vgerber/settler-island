@@ -18,3 +18,5 @@ mesh = ExtResource("3_nr8hp")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 visible = false
 mesh = ExtResource("4_58c6f")
+
+[connection signal="mouse_button_input" from="BuildLocation" to="." method="_on_build_location_mouse_button_input"]

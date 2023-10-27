@@ -11,6 +11,10 @@ config_version=5
 [application]
 
 config/name="settler-island"
-run/main_scene="res://scene/world/board.tscn"
+run/main_scene="res://scene/game/game.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameUserSession="*res://scene/game/game_user_session.gd"
