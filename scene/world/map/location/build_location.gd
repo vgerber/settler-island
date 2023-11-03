@@ -22,8 +22,8 @@ func _on_mouse_area_input_event(camera, event, position, normal, shape_idx):
 
 
 func _on_mouse_area_mouse_entered():
-	$LocationMesh.show()
+	scale = Vector3(1, 1, 1) * 1.5
 
 
 func _on_mouse_area_mouse_exited():
-	$LocationMesh.hide()
+	scale = Vector3(1, 1, 1) * 1

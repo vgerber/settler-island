@@ -14,12 +14,12 @@ albedo_color = Color(0.317647, 0.317647, 0.317647, 0.670588)
 script = ExtResource("1_a1n0w")
 
 [node name="LocationMesh" type="MeshInstance3D" parent="."]
-visible = false
 material_override = SubResource("StandardMaterial3D_naya5")
 mesh = SubResource("CylinderMesh_1q7p1")
 
 [node name="IdLabel" type="Label3D" parent="LocationMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17076, 0)
+visible = false
 pixel_size = 0.02
 billboard = 1
 double_sided = false

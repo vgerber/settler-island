@@ -9,6 +9,7 @@
 script = ExtResource("1_icax1")
 
 [node name="BuildLocation" parent="." instance=ExtResource("2_jym24")]
+visible = false
 
 [node name="VillageMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 0)

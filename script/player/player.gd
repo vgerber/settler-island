@@ -7,6 +7,7 @@ var resources: PlayerResources
 
 func _init(p_resources: PlayerResources):
 	resources = p_resources
+	resources.resource_changed.connect(func(resource: PlayerResource, amount: int): changed.emit())
 
 func get_prestiege() -> int:
 	return 0

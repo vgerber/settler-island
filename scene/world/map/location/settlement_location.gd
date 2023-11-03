@@ -1,6 +1,8 @@
 class_name SettlementLocation
 extends Node3D
 
+signal changed
+
 var neighbor_tiles: Array[HexagonTile]
 var player: Player = null
 
@@ -18,8 +20,20 @@ func set_id(id: String) -> void:
 	$BuildLocation.set_id(id)
 
 
-func _on_build_location_mouse_button_input(event):
-	pass # Replace with function body.
+func _on_build_location_mouse_button_input(event: InputEventMouse):
+	if not event is InputEventMouseButton:
+		return
+	if (event as InputEventMouseButton).pressed:
+		return
+	
+	var player = GameUserSession.player
+	if not GameUserSession.game.is_player_turn(player):
+		return
+	if is_village():
+		place_city(player)
+	else:
+		place_village(player)
+		
 
 func is_village() -> bool:
 	return $VillageMesh.visible
@@ -33,11 +47,13 @@ func reset() -> void:
 	player = null
 
 func place_village(p_player: Player) -> bool:
-	if player != p_player:
+	if player != null and player != p_player:
 		return false
 	if is_village() or is_city():
 		return false
+	player = p_player
 	$VillageMesh.show()
+	changed.emit()
 	return true
 
 func place_city(p_player: Player) -> bool:
@@ -47,4 +63,8 @@ func place_city(p_player: Player) -> bool:
 		return false
 	$VillageMesh.hide()
 	$CityMesh.show()
+	changed.emit()
 	return true
+
+func set_clickabel(clickable: bool) -> void:
+	$BuildLocation.visible = clickable

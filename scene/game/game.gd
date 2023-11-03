@@ -17,6 +17,9 @@ func _ready():
 		players.push_back(Player.new(BaseResources.new(get_resources())))
 	board_hud.set_player(players[0])
 	GameUserSession.player = players[0]
+	GameUserSession.game = self
+	board.settlement_map.changed.connect(update_build_locations)
+	update_build_locations()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,3 +39,27 @@ func end_turn(player: Player) -> void:
 	if not is_player_turn(player):
 		return
 	current_player_index = (current_player_index + 1) % players.size()
+
+func get_possible_settlement_locations(player: Player) -> Array[SettlementLocation]:
+	var map: SettlementMap = board.settlement_map
+	var settlement_count = map.get_player_settlements(player).size()
+	var possible_settlements: Array[SettlementLocation] = []
+	var settlement_filter = func(settlement: SettlementLocation):
+		if settlement_count < 2:
+			return true
+		return map.has_location_player_road(settlement, player)
+	return map.get_interactable_settlement_locations(player).filter(settlement_filter)
+
+func get_possible_road_locations(player: Player) -> Array[RoadLocation]:
+	return board.settlement_map.get_interactable_road_locations(player)
+
+func update_build_locations():
+	var map: SettlementMap = board.settlement_map
+	for road in map.get_roads():
+		road.set_clickabel(false)
+	for settlement in map.get_settlements():
+		settlement.set_clickabel(false)
+	for road in get_possible_road_locations(GameUserSession.player):
+		road.set_clickabel(true)
+	for settlement in get_possible_settlement_locations(GameUserSession.player):
+		settlement.set_clickabel(true)

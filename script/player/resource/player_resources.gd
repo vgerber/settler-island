@@ -1,6 +1,7 @@
 class_name PlayerResources
 extends RefCounted
 
+signal resource_changed(resource: PlayerResource, amount: int)
 	
 var resources: Dictionary = {}
 
@@ -12,10 +13,12 @@ func get_resource_count(resource: PlayerResource) -> int:
 
 func add_resource(resource: PlayerResource, amount: int) -> void:
 	resources[resource] += amount
+	resource_changed.emit(resource, amount)
 	
 func remove_resource(resource: PlayerResource, amount: int) -> void:
 	assert(resources[resource] > amount)
 	resources[resource] -= amount
+	resource_changed.emit(resource, -amount)
 
 func get_resource_keys() -> Array[PlayerResource]:
 	var player_resources: Array[PlayerResource] = []
