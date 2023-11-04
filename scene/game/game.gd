@@ -56,10 +56,10 @@ func get_possible_road_locations(player: Player) -> Array[RoadLocation]:
 func update_build_locations():
 	var map: SettlementMap = board.settlement_map
 	for road in map.get_roads():
-		road.set_clickabel(false)
+		road.set_clickable(false)
 	for settlement in map.get_settlements():
-		settlement.set_clickabel(false)
+		settlement.set_clickable(false)
 	for road in get_possible_road_locations(GameUserSession.player):
-		road.set_clickabel(true)
+		road.set_clickable(true)
 	for settlement in get_possible_settlement_locations(GameUserSession.player):
-		settlement.set_clickabel(true)
+		settlement.set_clickable(true)

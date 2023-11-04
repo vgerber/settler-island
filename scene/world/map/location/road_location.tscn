@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://wajjuvd1buy6"]
 
 [ext_resource type="Script" path="res://scene/world/map/location/road_location.gd" id="1_cqrbf"]
-[ext_resource type="PackedScene" uid="uid://ccaxp3063bt48" path="res://scene/world/map/location/build_location.tscn" id="2_0g1bx"]
+[ext_resource type="PackedScene" uid="uid://ccaxp3063bt48" path="res://scene/world/map/location/click_location.tscn" id="2_0g1bx"]
 [ext_resource type="ArrayMesh" uid="uid://dkhnvucmbwk6f" path="res://asset/tiles/road_piece.obj" id="3_0y26a"]
 
 [node name="RoadLocation" type="Node3D"]

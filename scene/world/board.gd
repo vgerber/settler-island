@@ -26,7 +26,8 @@ func _ready():
 	generate_base_resources()
 	place_base_settlement_locations()
 	place_value_chips()
-	camera.position = map.position + Vector3(0, 50, 0)
+	camera.position = map.position + Vector3(0, 40, 20)
+	camera.look_at(map.position)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

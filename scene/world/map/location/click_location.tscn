@@ -1,17 +1,20 @@
 [gd_scene load_steps=5 format=3 uid="uid://ccaxp3063bt48"]
 
-[ext_resource type="Script" path="res://scene/world/map/location/build_location.gd" id="1_a1n0w"]
+[ext_resource type="Script" path="res://scene/world/map/location/click_location.gd" id="1_1ysmw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_naya5"]
 transparency = 1
 albedo_color = Color(0.317647, 0.317647, 0.317647, 0.670588)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1q7p1"]
+top_radius = 1.0
+bottom_radius = 1.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y2yjf"]
+radius = 1.0
 
-[node name="BuildLocation" type="Node3D"]
-script = ExtResource("1_a1n0w")
+[node name="ClickLocation" type="Node3D"]
+script = ExtResource("1_1ysmw")
 
 [node name="LocationMesh" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_naya5")

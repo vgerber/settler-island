@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bat1r18tviw4m"]
+
+[node name="robber_location" type="Node3D"]

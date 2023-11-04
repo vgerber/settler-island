@@ -44,5 +44,5 @@ func build_road(p_player: Player) -> void:
 	player = p_player
 	changed.emit()
 
-func set_clickabel(clickable: bool) -> void:
+func set_clickable(clickable: bool) -> void:
 	$BuildLocation.visible = clickable

@@ -66,5 +66,5 @@ func place_city(p_player: Player) -> bool:
 	changed.emit()
 	return true
 
-func set_clickabel(clickable: bool) -> void:
+func set_clickable(clickable: bool) -> void:
 	$BuildLocation.visible = clickable

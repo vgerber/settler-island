@@ -1,4 +1,4 @@
-class_name BuildLocation
+class_name ClickLocation
 extends Node3D
 
 signal mouse_button_input(event: InputEventMouse)
