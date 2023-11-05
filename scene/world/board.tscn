@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkk6owccsfxtn"]
+[gd_scene load_steps=6 format=3 uid="uid://bkk6owccsfxtn"]
 
 [ext_resource type="Script" path="res://scene/world/board.gd" id="1_gkl64"]
 [ext_resource type="PackedScene" uid="uid://bmlwfmhh34hak" path="res://scene/world/camera.tscn" id="1_n1u78"]
 [ext_resource type="Script" path="res://scene/world/map/hexagon/hexagon_map.gd" id="4_lbsr5"]
 [ext_resource type="PackedScene" uid="uid://c8xklw5v4an3i" path="res://scene/world/map/location/settlement_map.tscn" id="4_nr257"]
+[ext_resource type="PackedScene" uid="uid://bat1r18tviw4m" path="res://scene/world/map/location/robber_location.tscn" id="5_ixvql"]
 
 [node name="Board" type="Node3D"]
 script = ExtResource("1_gkl64")
@@ -18,3 +19,5 @@ transform = Transform3D(-0.863378, -0.396336, 0.312244, 0, 0.618847, 0.785511, -
 
 [node name="HexagonMap" type="Node3D" parent="."]
 script = ExtResource("4_lbsr5")
+
+[node name="RobberLocation" parent="." instance=ExtResource("5_ixvql")]

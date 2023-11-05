@@ -1,6 +1,8 @@
 class_name HexagonTile
 extends Node3D
 
+signal mouse_button_input(event: InputEventMouseButton)
+
 @export var tile_mesh: MeshInstance3D
 @export var size = 5
 
@@ -14,23 +16,22 @@ var cube_coordinates = Vector3i(0, 0, 0):
 var height = size * sqrt(3)
 var width = size * 2
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	set_debug_color(Color(randf(), randf(), randf()))
+var click_location: ClickLocation =  preload("res://scene/world/map/location/click_location.tscn").instantiate()
+
+func _init():
+	#set_debug_color(Color(randf(), randf(), randf()))
+	add_child(click_location)
+	click_location.visible = true
+	click_location.position.y += 2
+	click_location.mouse_button_input.connect(func(event: InputEventMouseButton): mouse_button_input.emit(event))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
-func _on_area_3d_input_event(camera, event, position, normal, shape_idx):
-	if not event is InputEventMouseButton:
-		return
-	
-	event = event as InputEventMouseButton
-	if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-		print(cube_coordinates)
-
 func set_debug_color(color: Color):
 	tile_mesh.material_override.albedo_color = color
+
+func set_clickable(clickable: bool) -> void:
+	click_location.visible = clickable

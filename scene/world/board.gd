@@ -4,11 +4,12 @@ extends Node3D
 @onready var map: HexagonMap = $HexagonMap
 @onready var settlement_map: SettlementMap = $SettlementMap
 @onready var camera: Camera3D = $Camera
-
+@onready var robber: RobberLocation = $RobberLocation
 
 
 var base_map_size: int = 3
 var dice_value_chips: Node3D = Node3D.new()
+var robber_tiles: Array[HexagonTile] = []
 
 var board_resources: Array[PlayerResource] = [
 	WoodResource.new(),
@@ -28,6 +29,7 @@ func _ready():
 	place_value_chips()
 	camera.position = map.position + Vector3(0, 40, 20)
 	camera.look_at(map.position)
+	robber.assign_tile(map.get_tile(Vector3i(0, 0, 0)))
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,6 +72,7 @@ func generate_base_resources() -> void:
 			tile.cube_coordinates = Vector3i(q, r, s)
 			tile.name = "HexagonTile %s,%s,%s" % [q, r, s]
 			map.add_tile(tile)
+			robber_tiles.push_back(tile)
 			
 			if tile is ResourceTile:
 				var chip = preload("res://scene/world/map/tile_value_chip.tscn").instantiate() as TileValueChip

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://jy0obndly280"
+path="res://.godot/imported/robber.obj-8ddac6a31ea375effc7ee020fa445355.mesh"
+
+[deps]
+
+files=["res://.godot/imported/robber.obj-8ddac6a31ea375effc7ee020fa445355.mesh"]
+
+source_file="res://asset/tiles/robber.obj"
+dest_files=["res://.godot/imported/robber.obj-8ddac6a31ea375effc7ee020fa445355.mesh", "res://.godot/imported/robber.obj-8ddac6a31ea375effc7ee020fa445355.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
