@@ -44,19 +44,27 @@ offset_top = -101.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="DiceValueLbl" type="Label" parent="Actions"]
+visible = false
+clip_contents = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 35
+text = "12"
+horizontal_alignment = 1
+
 [node name="RollDiceBtn" type="Button" parent="Actions"]
+visible = false
 layout_mode = 2
 text = "Roll Dice"
 
-[node name="TradeBtn" type="Button" parent="Actions"]
-layout_mode = 2
-text = "Trade"
-
 [node name="EndRoundBtn" type="Button" parent="Actions"]
+visible = false
 layout_mode = 2
 text = "End Round"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Players" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.06
@@ -66,21 +74,13 @@ offset_top = 4.12
 offset_right = 269.0
 offset_bottom = 98.088
 
-[node name="PlayerSummary" parent="VBoxContainer" instance=ExtResource("2_gyqxh")]
+[node name="PlayerSummary" parent="Players" instance=ExtResource("2_gyqxh")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="PlayerSummary2" parent="VBoxContainer" instance=ExtResource("2_gyqxh")]
+[node name="PlayerSummary2" parent="Players" instance=ExtResource("2_gyqxh")]
 layout_mode = 2
 metadata/_edit_lock_ = true
-
-[node name="PlayerInformation" parent="." instance=ExtResource("2_lcajx")]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
-grow_horizontal = 1
-grow_vertical = 0
 
 [node name="GameLog" parent="." instance=ExtResource("4_ks2dp")]
 layout_mode = 1
@@ -91,6 +91,39 @@ offset_left = -0.136047
 offset_top = 47.0
 offset_right = -10.0
 offset_bottom = -0.320007
+
+[node name="PlayerStates" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -136.0
+offset_right = 83.0
+grow_vertical = 0
+
+[node name="PlayerInformation" parent="PlayerStates" instance=ExtResource("2_lcajx")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="ResourceActions" type="VBoxContainer" parent="PlayerStates"]
+layout_mode = 2
+
+[node name="BuildRoadBtn" type="Button" parent="PlayerStates/ResourceActions"]
+layout_mode = 2
+text = "Road"
+
+[node name="BuildVillageBtn" type="Button" parent="PlayerStates/ResourceActions"]
+layout_mode = 2
+text = "Village"
+
+[node name="BuildCityBtn" type="Button" parent="PlayerStates/ResourceActions"]
+layout_mode = 2
+text = "City"
+
+[node name="TradeBtn" type="Button" parent="PlayerStates/ResourceActions"]
+layout_mode = 2
+text = "Trade"
 
 [connection signal="toggled" from="HBoxContainer/LogBtn" to="." method="_on_log_btn_toggled"]
 [connection signal="pressed" from="Actions/RollDiceBtn" to="." method="_on_roll_dice_btn_pressed"]

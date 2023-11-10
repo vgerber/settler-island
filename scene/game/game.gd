@@ -6,6 +6,7 @@ extends Node
 
 var players: Array[Player]
 var current_player_index = 0
+var game_state: GameState
 
 func _init():
 	pass
@@ -20,7 +21,9 @@ func _ready():
 	GameUserSession.game = self
 	board.settlement_map.changed.connect(update_build_locations)
 	update_build_locations()
-
+	
+	game_state = GameState.new(self)
+	game_state.set_current_action(game_state.get_action(RollDiceAction.get_id()))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -3,7 +3,12 @@ extends Control
 
 var game: Game
 var player: Player
-@onready var player_information: PlayerInformation = $PlayerInformation
+@onready var player_information: PlayerInformation = $PlayerStates/PlayerInformation
+
+@onready var dive_value_lbl: Label = $Actions/DiceValueLbl
+@onready var dice_btn: Button = $Actions/RollDiceBtn
+
+@onready var end_round_btn: Button = $Actions/EndRoundBtn
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,17 +27,6 @@ func set_player(p_player: Player) -> void:
 func update_data() -> void:
 	pass
 
-
-func _on_roll_dice_btn_pressed():
-	var dices = game.roll_dice()
-	var dice_value = dices[0] + dices[1]
-	print(dice_value)
-	get_log().log_generic(Time.get_unix_time_from_system(), load("res://icon.svg"), "Dice %s" % dice_value)
-	
-	var tiles = game.board.get_tiles_for_chip_value(dice_value)
-	print(tiles)
-	for tile in tiles:
-		tile.add_resource_to_settlements()
 
 
 func _on_log_btn_toggled(button_pressed):

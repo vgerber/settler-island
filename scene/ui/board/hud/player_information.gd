@@ -1,9 +1,9 @@
 class_name PlayerInformation
-extends Control
+extends PanelContainer
 
 var player: Player
 
-@onready var resource_grid: GridContainer = $PanelContainer/MarginContainer/VBoxContainer/PlayerResources
+@onready var resource_grid: GridContainer = $MarginContainer/VBoxContainer/PlayerResources
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
