@@ -32,5 +32,3 @@ collision_mask = 0
 [node name="Shape" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(-4.36868e-08, 0, 0.999437, 0, 0.999437, 0, -0.999437, 0, -4.36868e-08, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_aihdb")
-
-[connection signal="input_event" from="Area3D" to="." method="_on_area_3d_input_event"]

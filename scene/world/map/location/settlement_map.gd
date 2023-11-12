@@ -81,6 +81,16 @@ func has_location_player_road(settlement: SettlementLocation, player: Player) ->
 func get_player_settlements(player: Player) -> Array[SettlementLocation]:
 	return get_settlements().filter(func(settlement: SettlementLocation): return settlement.player == player)
 	
+func get_player_villages(player: Player) -> Array[SettlementLocation]:
+	var villages: Array[SettlementLocation] = []
+	villages.assign(get_player_settlements(player).filter(func(settlement: SettlementLocation): return settlement.is_village()))
+	return villages
+
+func get_player_cities(player: Player) -> Array[SettlementLocation]:
+	var cities: Array[SettlementLocation] = []
+	cities.assign(get_player_settlements(player).filter(func(settlement: SettlementLocation): return settlement.is_city()))
+	return cities
+
 func get_player_roads(player: Player) -> Array[RoadLocation]:
 	return get_roads().filter(func(road: RoadLocation): return road.player == player)
 

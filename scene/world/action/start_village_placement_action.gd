@@ -1,4 +1,4 @@
-class_name BuildVillageAction
+class_name StartVillagePlacementAction
 extends PlayerAction
 
 var settlement_map: SettlementMap
@@ -7,13 +7,10 @@ func _init():
 	context_changed.connect(_on_context_changed)
 
 static func get_id() -> String:
-	return "BuildVillageAction"
+	return "StartVillagePlacementAction"
 
 func start() -> void:
-	hud.game_actions_container.show()
-	hud.cancel_action_btn.show()
-	hud.dice_btn.hide()
-	hud.end_round_btn.hide()
+	hud.game_actions_container.hide()
 	hud.resource_actions_container.hide()
 	
 	show_possible_village_locations()
@@ -23,13 +20,22 @@ func _on_context_changed() -> void:
 	settlement_map = board.settlement_map
 	for village in settlement_map.get_settlements():
 		village.changed.connect(func(): _on_village_build(village))
-	hud.cancel_action_btn.pressed.connect(_on_cancel)
-	
-func _on_cancel() -> void:
-	finish(EconomySelectionAction.get_id())
 
 func _on_village_build(village: SettlementLocation) -> void:
-	finish(EconomySelectionAction.get_id())
+	var current_player: Player = game.players[game.current_player_index]
+	var next_player: Player = game.players[game.get_next_player_index(game.current_player_index)]
+	var has_two_settlements = board.settlement_map.get_player_settlements(current_player).size() == 2
+	var is_last_player = game.current_player_index == game.players.size()-1
+	
+	var player_settlements = board.settlement_map.get_player_settlements(current_player)
+	
+	if is_last_player and not has_two_settlements:
+		refresh_possible_locations()
+		return
+	
+	game.current_player_index = game.get_next_player_index(game.current_player_index)
+	if board.settlement_map.get_player_settlements(next_player).size() == 2:
+		finish(RollDiceAction.get_id())
 
 func get_possible_village_locations(player: Player) -> Array[SettlementLocation]:
 	var villages: Array[SettlementLocation] = []
@@ -45,8 +51,9 @@ func hide_village_locations() -> void:
 	for settlement in settlement_map.get_settlements():
 		settlement.set_clickable(false)
 
-func finish(next_action: String) -> void:
-	if not is_active():
-		return
+func refresh_possible_locations() -> void:
 	hide_village_locations()
+	show_possible_village_locations()
+
+func finish(next_action: String) -> void:
 	super.finish(next_action)

@@ -1,3 +1,4 @@
+class_name IconLabel
 extends Control
 
 @export var label_settings: LabelSettings:

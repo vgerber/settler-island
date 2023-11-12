@@ -17,8 +17,12 @@ func get_action(action_id: String) -> PlayerAction:
 	return actions[action_id]
 
 func _init(p_game: Game):
+	actions[StartVillagePlacementAction.get_id()] = StartVillagePlacementAction.new()
 	actions[RollDiceAction.get_id()] = RollDiceAction.new()
 	actions[EconomySelectionAction.get_id()] = EconomySelectionAction.new()
+	actions[BuildRoadAction.get_id()] = BuildRoadAction.new()
+	actions[BuildVillageAction.get_id()] = BuildVillageAction.new()
+	actions[BuildCityAction.get_id()] = BuildCityAction.new()
 	
 	for action in actions.values():
 		action = (action as PlayerAction)

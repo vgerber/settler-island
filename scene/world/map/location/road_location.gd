@@ -1,7 +1,7 @@
 class_name RoadLocation
 extends Node3D
 
-signal  changed
+signal changed
 
 var settlement_a: SettlementLocation
 var settlement_b: SettlementLocation

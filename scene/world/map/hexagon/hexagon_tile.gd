@@ -21,7 +21,7 @@ var click_location: ClickLocation =  preload("res://scene/world/map/location/cli
 func _init():
 	#set_debug_color(Color(randf(), randf(), randf()))
 	add_child(click_location)
-	click_location.visible = true
+	click_location.visible = false
 	click_location.position.y += 2
 	click_location.mouse_button_input.connect(func(event: InputEventMouseButton): mouse_button_input.emit(event))
 

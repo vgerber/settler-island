@@ -9,6 +9,7 @@ static func get_id() -> String:
 
 func start() -> void:
 	hud.dice_btn.show()
+	hud.resource_actions_container.hide()
 	super.start()
 
 func _on_context_changed() -> void:

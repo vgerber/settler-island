@@ -1,15 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://cb67trj45r7wr"]
+[gd_scene load_steps=5 format=3 uid="uid://cb67trj45r7wr"]
 
 [ext_resource type="Script" path="res://scene/ui/board/hud/player_summary_item.gd" id="1_t1xqw"]
 [ext_resource type="Texture2D" uid="uid://caorssw4f1axb" path="res://icon.svg" id="1_whrl3"]
 [ext_resource type="PackedScene" uid="uid://b1e4j0yp4xg4m" path="res://scene/ui/controls/icon_label.tscn" id="2_itrf6"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0bln"]
+resource_local_to_scene = true
+bg_color = Color(0.262745, 0.262745, 0.262745, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="PlayerSummaryItem" type="PanelContainer"]
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_g0bln")
 script = ExtResource("1_t1xqw")
+active_color = Color(0.670588, 0.32549, 0.403922, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
