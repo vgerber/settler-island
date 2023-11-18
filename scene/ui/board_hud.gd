@@ -11,6 +11,7 @@ var player: Player
 @onready var end_round_btn: Button = $Actions/EndRoundBtn
 @onready var cancel_action_btn: Button = $Actions/CancelActionBtn
 
+
 @onready var resource_actions_container: VBoxContainer = $PlayerStates/ResourceActions
 @onready var build_road_btn: Button = $PlayerStates/ResourceActions/BuildRoadBtn
 @onready var build_village_btn: Button = $PlayerStates/ResourceActions/BuildVillageBtn
@@ -32,8 +33,7 @@ func set_player(p_player: Player) -> void:
 	player_information.set_player(player)
 
 func update_data() -> void:
-	pass
-
+	set_players(game.players)
 
 
 func _on_log_btn_toggled(button_pressed):

@@ -3,6 +3,7 @@ extends RefCounted
 
 signal changed()
 
+var user: User
 var resources: PlayerResources
 
 func _init(p_resources: PlayerResources):
