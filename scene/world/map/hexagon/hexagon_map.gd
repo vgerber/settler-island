@@ -1,4 +1,4 @@
-class_name HexagonMap
+class_name HexagonMapScene
 extends Node3D
 
 var gap_size: float = 0.5

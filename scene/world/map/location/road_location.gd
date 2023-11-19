@@ -1,4 +1,4 @@
-class_name RoadLocation
+class_name RoadLocationScene
 extends Node3D
 
 signal changed

@@ -1,4 +1,4 @@
-class_name HexagonTile
+class_name HexagonTileScene
 extends Node3D
 
 signal mouse_button_input(event: InputEventMouseButton)

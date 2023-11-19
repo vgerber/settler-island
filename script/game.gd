@@ -1,38 +1,24 @@
-class_name GameScene
+class_name Game
 extends Node
 
 signal current_player_changed
 
-@onready var board: Board = $Board
-@onready var board_hud: BoardHUD = $BoardHUD
-
-var players: Array[Player]
+var board: GameBoard
+var players: Array[PlayerSummary]
 var current_player_index = 0:
 	set(index):
 		current_player_index = index
 		current_player_changed.emit()
 var game_state: GameState
 
-func _init():
-	pass
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	board_hud.game = self
-	for player_index in range(4):
-		players.push_back(Player.new(BaseResources.new(get_resources())))
-	board_hud.set_player(players[0])
-	GameUserSession.player = players[0]
+func _init(p_board: GameBoard, p_players: Array[PlayerSummary], p_session_player: Player):
+	board = p_board
+	players = p_players
+	GameUserSession.player = p_session_player
 	GameUserSession.game = self
 	
 	game_state = GameState.new(self)
 	game_state.set_current_action(game_state.get_action(StartVillagePlacementAction.get_id()))
-	
-	board_hud.set_players(players)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func roll_dice() -> Array[int]:
 	return [randi_range(1, 6), randi_range(1, 6)]
@@ -46,7 +32,7 @@ func get_next_player_index(player_index: int) -> int:
 func is_player_turn(player: Player) -> bool:
 	return true or player == players[current_player_index]
 
-func get_current_player() -> Player:
+func get_current_player() -> PlayerSummary:
 	return players[current_player_index]
 
 func get_possible_settlement_locations(player: Player) -> Array[SettlementLocation]:

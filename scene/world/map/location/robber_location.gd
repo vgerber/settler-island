@@ -1,4 +1,4 @@
-class_name RobberLocation
+class_name RobberLocationScene
 extends Node3D
 
 signal assigned

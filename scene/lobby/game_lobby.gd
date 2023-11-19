@@ -1,7 +1,7 @@
 class_name GameLobby
 extends Control
 
-@onready var players_list: VBoxContainer = $VBoxContainer/HBoxContainer/Players
+@onready var players_list: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PanelContainer/Players
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -9,3 +9,6 @@ func get_name() -> String:
 
 func get_icon() -> Texture2D:
 	return load("res://icon.svg")
+
+func to_dict() -> Dictionary:
+	return { "id": get_id() }

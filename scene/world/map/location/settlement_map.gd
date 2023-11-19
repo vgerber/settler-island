@@ -1,4 +1,4 @@
-class_name SettlementMap
+class_name SettlementMapScene
 extends Node3D
 
 signal changed

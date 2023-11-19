@@ -1,8 +1,8 @@
-class_name ResourceTile
+class_name ResourceTileScene
 extends HexagonTile
 
 var assigned_settlements: Array[SettlementLocation] = []
-var resource_type: PlayerResource
+var resource_id: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,8 +13,8 @@ func _ready():
 func _process(delta):
 	pass
 
-func set_resource(p_resource_type: PlayerResource) -> void:
-	resource_type = p_resource_type
+func set_resource(p_resource_id: String) -> void:
+	resource_id = p_resource_id
 
 func add_resource_to_settlements() -> void:
 	for settlement in assigned_settlements:
@@ -24,4 +24,4 @@ func add_resource_to_settlements() -> void:
 		var resource_count = 1
 		if settlement.is_city():
 			resource_count += 1
-		settlement.player.resources.add_resource(resource_type, resource_count)
+		settlement.player.resources.add_resource(resource_id, resource_count)
