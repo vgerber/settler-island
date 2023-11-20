@@ -3,13 +3,13 @@ extends RefCounted
 
 signal changed()
 
-var player_id: String
+var id: String
 var user_id: String
 var resources: PlayerResources
 var color: Color
 
-func _init(p_player_id: String, p_user_id: String, p_resources: PlayerResources, p_color: Color):
-	player_id = p_player_id
+func _init(p_id: String, p_user_id: String, p_resources: PlayerResources, p_color: Color):
+	id = p_id
 	user_id = p_user_id
 	resources = p_resources
 	resources.resource_changed.connect(func(resource: PlayerResource, amount: int): changed.emit())
@@ -21,7 +21,7 @@ func get_color() -> Color:
 static func from_dict(dict: Dictionary) -> Player:
 	var color_array = dict["color"]
 	return Player.new(
-		dict["player_id"],
+		dict["id"],
 		dict["user_id"], 
 		BaseResources.new(dict["resources"]),
 		Color(color_array[0], color_array[1], color_array[2])
@@ -29,7 +29,7 @@ static func from_dict(dict: Dictionary) -> Player:
 
 func to_dict() -> Dictionary:
 	var player: Dictionary = {}
-	player["player_id"] = player_id
+	player["id"] = id
 	player["user_id"] = user_id
 	player["resources"] = (resources as BaseResources).to_dict()
 	player["color"] = [0.0, 0.0, 0.0]

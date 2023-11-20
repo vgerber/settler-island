@@ -111,3 +111,12 @@ func get_interactable_road_locations(player_id: String) -> Array[RoadLocation]:
 		return has_location_player_road(location.settlement_a, player_id) or has_location_player_road(location.settlement_b, player_id)
 			
 	return get_roads().filter(road_filter)
+
+func get_possible_settlement_locations(player_id: String) -> Array[SettlementLocation]:
+	var settlement_count = get_player_settlements(player_id).size()
+	var possible_settlements: Array[SettlementLocation] = []
+	var settlement_filter = func(settlement: SettlementLocation):
+		if settlement_count < 2:
+			return true
+		return has_location_player_road(settlement.id, player_id)
+	return get_interactable_settlement_locations(player_id).filter(settlement_filter)
