@@ -1,13 +1,13 @@
 class_name LobbyUser
 extends RefCounted
 
-var user_id: String
+var user: User
 
-func _init(p_user_id: String):
-	user_id = p_user_id
+func _init(p_user: User):
+	user = p_user
 	
 static func from_dict(user: Dictionary) -> LobbyUser:
-	return LobbyUser.new(user["user_id"])
+	return LobbyUser.new(User.from_dict(user["user"]))
 
 func to_dict() -> Dictionary:
-	return { "user_id": user_id }
+	return { "user": user.to_dict() }

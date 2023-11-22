@@ -1,7 +1,7 @@
 class_name BoardHUD
 extends Control
 
-var game: Game
+var game: GameScene
 var player: Player
 @onready var player_information: PlayerInformation = $PlayerStates/PlayerInformation
 
@@ -29,11 +29,7 @@ func _process(delta):
 
 func set_player(p_player: Player) -> void:
 	player = p_player
-	player.changed.connect(update_data)
 	player_information.set_player(player)
-
-func update_data() -> void:
-	set_players(game.players)
 
 
 func _on_log_btn_toggled(button_pressed):
@@ -42,7 +38,7 @@ func _on_log_btn_toggled(button_pressed):
 func get_log() -> GameLog:
 	return $GameLog
 
-func set_players(players: Array[Player]) -> void:
+func set_players(players: Array[PlayerSummary]) -> void:
 	var player_summary_scene = preload("res://scene/ui/board/hud/player_summary_item.tscn")
 	for player_index in range(players.size()):
 		var player_summary_item = player_summary_scene.instantiate() as PlayerSummeryItem

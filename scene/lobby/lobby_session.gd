@@ -71,18 +71,17 @@ func start_game() -> void:
 	pass
 
 @rpc("any_peer", "reliable")
-func _register_player(user_name: String) -> void:
-	_add_user(get_multiplayer().get_remote_sender_id(), _lobby_user_form_string(user_name))
-	var user_names = {}
+func _register_player(user: Dictionary) -> void:
+	_add_user(get_multiplayer().get_remote_sender_id(), LobbyUser.from_dict(user))
+	var users_dict = {}
 	for user_id in users.keys():
-		user_names[user_id] = users[user_id].user.name
-	_registered_players_changed.rpc(user_names)
+		users_dict[user_id] = users[user_id].to_dict()
+	_registered_players_changed.rpc(users_dict)
 
 @rpc("authority", "reliable")
 func _registered_players_changed(p_users: Dictionary) -> void:
-	print(p_users)
 	for user_id in p_users.keys():
-		_add_user(user_id, _lobby_user_form_string(p_users[user_id]))
+		_add_user(user_id, LobbyUser.from_dict(p_users[user_id]))
 
 func is_host() -> bool:
 	return multiplayer.is_server()
@@ -99,6 +98,3 @@ func _remove_user(id: int) -> void:
 	var user = users[id]
 	users.erase(id)
 	user_left.emit(id, user)
-
-func _lobby_user_form_string(name: String) -> LobbyUser:
-	return LobbyUser.new(User.new(name))

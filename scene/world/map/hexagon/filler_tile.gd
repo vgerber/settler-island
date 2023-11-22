@@ -1,5 +1,5 @@
-class_name FillerTile
-extends HexagonTile
+class_name FillerTileScene
+extends HexagonTileScene
 
 
 # Called when the node enters the scene tree for the first time.

@@ -6,12 +6,11 @@ signal mouse_button_input(event: InputEventMouseButton)
 @export var tile_mesh: MeshInstance3D
 @export var size = 5
 
+
 var cube_coordinates = Vector3i(0, 0, 0):
 	set(coordinates):
 		cube_coordinates = coordinates
-		var q = cube_coordinates.x
-		var r = cube_coordinates.y
-		position = Vector3(0.75 * width * q, 0, q * 0.5 * height) + Vector3(0, 0, r * height)
+		position = Hexagon.get_tile_position(cube_coordinates.x, cube_coordinates.y, width, height)
 		#$TileMesh/CoordinateLabel.text = "(%s,%s,%s)" % [coordinates.x, coordinates.y, coordinates.z]
 var height = size * sqrt(3)
 var width = size * 2

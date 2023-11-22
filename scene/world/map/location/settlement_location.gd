@@ -4,7 +4,7 @@ extends Node3D
 signal changed
 
 var neighbor_tiles: Array[HexagonTile]
-var player: Player = null
+var player_id: String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,10 +30,9 @@ func _on_build_location_mouse_button_input(event: InputEventMouse):
 	if not GameUserSession.game.is_player_turn(player):
 		return
 	if is_village():
-		place_city(player)
+		player_place_city(player)
 	else:
-		place_village(player)
-		
+		player_place_village(player)
 
 func is_village() -> bool:
 	return $VillageMesh.visible
@@ -44,27 +43,34 @@ func is_city() -> bool:
 func reset() -> void:
 	$VillageMesh.hide()
 	$CityMesh.hide()
-	player = null
+	player_id = ""
 
-func place_village(p_player: Player) -> bool:
-	if player != null and player != p_player:
+func player_place_village(p_player_id: String) -> bool:
+	if not player_id.is_empty() and player_id != p_player_id:
 		return false
 	if is_village() or is_city():
 		return false
-	player = p_player
-	$VillageMesh.show()
+	set_village(p_player_id)
 	changed.emit()
 	return true
 
-func place_city(p_player: Player) -> bool:
-	if player != p_player:
+func player_place_city(p_player_id: String) -> bool:
+	if player_id != p_player_id:
 		return false
 	if not is_village():
 		return false
-	$VillageMesh.hide()
-	$CityMesh.show()
+	set_city(p_player_id)
 	changed.emit()
 	return true
+
+func set_village(p_player_id: String) -> void:
+	player_id = p_player_id
+	$VillageMesh.show()
+
+func set_city(p_player_id: String) -> void:
+	player_id = p_player_id
+	$VillageMesh.hide()
+	$CityMesh.show()	
 
 func set_clickable(clickable: bool) -> void:
 	$BuildLocation.visible = clickable

@@ -20,4 +20,6 @@ transform = Transform3D(-0.863378, -0.396336, 0.312244, 0, 0.618847, 0.785511, -
 [node name="HexagonMap" type="Node3D" parent="."]
 script = ExtResource("4_lbsr5")
 
+[node name="DiceChips" type="Node3D" parent="HexagonMap"]
+
 [node name="RobberLocation" parent="." instance=ExtResource("5_ixvql")]

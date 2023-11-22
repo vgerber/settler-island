@@ -5,8 +5,8 @@ signal started
 signal finished(next_action: String)
 signal context_changed
 
-var game: Game
-var board: Board
+var game: GameScene
+var board: GameBoard
 var hud: BoardHUD
 
 var _active: bool = false
@@ -23,7 +23,7 @@ func finish(next_action: String) -> void:
 	_active = false
 	finished.emit(next_action)
 
-func set_context(p_game: Game, p_board: Board) -> void:
+func set_context(p_game: GameScene, p_board: GameBoard) -> void:
 	game = p_game
 	board = p_board
 	hud = p_game.board_hud

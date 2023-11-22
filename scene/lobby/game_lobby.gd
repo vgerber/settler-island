@@ -29,3 +29,12 @@ func update_users() -> void:
 		var user_item: LobbyUserItem = preload("res://scene/lobby/controls/lobby_user_item.tscn").instantiate()
 		user_item.set_user(lobby_user)
 		players_list.add_child(user_item)
+
+func generate_game() -> Game:
+	var board = BaseBoardGenerator.new().generate_board()
+	
+	var players: Array[Player] = []
+	for lobby_user in LobbySession.users:
+		lobby_user = lobby_user as LobbyUser
+		players.push_back(Player.new(lobby_user.user_id, lobby_user.user_id, BaseResources.new(board.board_resources), Color(randf(), randf(), randf())))
+	return Game.new(board, players)

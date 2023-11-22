@@ -25,7 +25,7 @@ func to_dict() -> Dictionary:
 		"game_state_id": game_state_id
 	}
 
-func get_resources() -> Array[PlayerResource]:
+func get_resources() -> Array[String]:
 	return board.board_resources
 
 func get_next_player_index(player_index: int) -> int:

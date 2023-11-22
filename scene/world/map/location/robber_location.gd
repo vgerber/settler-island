@@ -1,9 +1,9 @@
 class_name RobberLocationScene
 extends Node3D
 
-signal assigned
+signal assigned(tile: HexagonTileScene)
 
-var assigned_tile: HexagonTile = null
+var assigned_tile: HexagonTileScene = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +14,7 @@ func _ready():
 func _process(delta):
 	pass
 
-func assign_tile(tile: HexagonTile) -> void:
+func assign_tile(tile: HexagonTileScene) -> void:
 	assigned_tile = tile
 	position = tile.position + Vector3(0, 1, 0)
-	assigned.emit()
+	assigned.emit(assigned_tile)

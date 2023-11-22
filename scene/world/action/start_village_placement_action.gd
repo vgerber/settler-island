@@ -22,24 +22,24 @@ func _on_context_changed() -> void:
 		village.changed.connect(func(): _on_village_build(village))
 
 func _on_village_build(village: SettlementLocation) -> void:
-	var current_player: Player = game.players[game.current_player_index]
-	var next_player: Player = game.players[game.get_next_player_index(game.current_player_index)]
-	var has_two_settlements = board.settlement_map.get_player_settlements(current_player).size() == 2
+	var current_player: PlayerSummary = game.players[game.current_player_index]
+	var next_player: PlayerSummary = game.players[game.get_next_player_index(game.current_player_index)]
+	var has_two_settlements = board.settlement_map.get_player_settlements(current_player.player_id).size() == 2
 	var is_last_player = game.current_player_index == game.players.size()-1
 	
-	var player_settlements = board.settlement_map.get_player_settlements(current_player)
+	var player_settlements = board.settlement_map.get_player_settlements(current_player.player_id)
 	
 	if is_last_player and not has_two_settlements:
 		refresh_possible_locations()
 		return
 	
 	game.current_player_index = game.get_next_player_index(game.current_player_index)
-	if board.settlement_map.get_player_settlements(next_player).size() == 2:
+	if board.settlement_map.get_player_settlements(next_player.player_id).size() == 2:
 		finish(RollDiceAction.get_id())
 
 func get_possible_village_locations(player: Player) -> Array[SettlementLocation]:
 	var villages: Array[SettlementLocation] = []
-	villages.assign(game.get_possible_settlement_locations(player)
+	villages.assign(game.get_possible_settlement_locations(player.id)
 		.filter(func(settlement: SettlementLocation): return not settlement.is_village() and not settlement.is_city()))
 	return villages
 

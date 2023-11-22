@@ -1,5 +1,5 @@
 class_name ResourceTileScene
-extends HexagonTile
+extends HexagonTileScene
 
 var assigned_settlements: Array[SettlementLocation] = []
 var resource_id: String

@@ -29,4 +29,4 @@ func _on_connect_btn_pressed():
 	get_tree().change_scene_to_packed(preload("res://scene/lobby/game_lobby.tscn"))
 
 func create_user() -> User:
-	return User.new(user_name_edit.text)
+	return User.new(user_name_edit.text + "_id", user_name_edit.text)

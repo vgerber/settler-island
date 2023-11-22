@@ -23,6 +23,9 @@ func to_dict() -> Dictionary:
 		"settlements_connections": settlements_connections
 	}
 
+func has_road(road_id: String) -> bool:
+	return roads.has(road_id)
+
 func add_road(road: RoadLocation) -> void:
 	roads[road.id] = road
 	if not settlements_connections.has(road.settlement_a.id):
@@ -32,6 +35,9 @@ func add_road(road: RoadLocation) -> void:
 		
 	settlements_connections[road.settlement_a.id].push_back(road.id)
 	settlements_connections[road.settlement_b.id].push_back(road.id)
+
+func has_settlement(settlement_id: String) -> bool:
+	return settlements.has(settlement_id)
 
 func add_settlement(settlement: SettlementLocation) -> void:
 	settlements[settlement.id] = settlement

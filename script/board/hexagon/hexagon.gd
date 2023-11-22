@@ -13,10 +13,10 @@ static func get_coordinates_from_qs(q: int, s: int) -> Vector3i:
 static func get_coordinates_from_rs(r: int, s: int) -> Vector3i:
 	return Vector3i(-r - s, r, s)
 
-static func get_tile_neighbor_coordinates(tile: HexagonTile) -> Array[Vector3i]:
+static func get_neighbor_coordinates(tile_coordinates: Vector3i) -> Array[Vector3i]:
 	var neighbor_coordinates: Array[Vector3i] = [Vector3i(1, 0, -1), Vector3i(0, 1, -1), Vector3i(-1, 1, 0), Vector3i(-1, 0, 1), Vector3i(0, -1, 1), Vector3i(1, -1, 0)]
 	for neighbor_index in range(neighbor_coordinates.size()):
-		neighbor_coordinates[neighbor_index] += tile.cube_coordinates
+		neighbor_coordinates[neighbor_index] += tile_coordinates
 	return neighbor_coordinates
 
 static func coordinates_to_position(coordinates: Vector3i, tile_size: Vector2) -> Vector3:

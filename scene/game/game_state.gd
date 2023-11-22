@@ -16,7 +16,7 @@ func set_current_action(action: PlayerAction) -> void:
 func get_action(action_id: String) -> PlayerAction:
 	return actions[action_id]
 
-func _init(p_game: Game):
+func _init(p_game: GameScene):
 	actions[StartVillagePlacementAction.get_id()] = StartVillagePlacementAction.new()
 	actions[RollDiceAction.get_id()] = RollDiceAction.new()
 	actions[EconomySelectionAction.get_id()] = EconomySelectionAction.new()
